@@ -1,0 +1,43 @@
+def list_movies():
+    with open("movies.txt", "r") as f:
+        movies = f.read()
+        print(movies)
+        print()
+
+def add_movie():
+    movie_name = input("Enter movie name: ")
+    with open("movies.txt", "a") as f:
+        f.write(movie_name + "\n")
+    print(f"Added movie {movie_name}\n")
+
+def delete_movie():
+    movie_name = input("Enter movie name: ")
+    with open("movies.txt", "r") as f:
+        movies = f.readlines()
+    with open("movies.txt", "w") as f:
+        for movie in movies:
+            if movie.strip("\n") != movie_name:
+                f.write(movie)
+    print(f"Deleted movie {movie_name}\n")
+
+print("~~~The Movie List Program~~~\n")
+
+while True:
+    print("~Command Menu~")
+    print("list - list all movies")
+    print("add - add a movie")
+    print("del - delete a movie")
+    print("exit - exit program")
+
+    command = input("Enter command: ")
+
+    if command == "list":
+        list_movies()
+    elif command == "add":
+        add_movie()
+    elif command == "del":
+        delete_movie()
+    elif command == "exit":
+        break
+    else:
+        print("Invalid command. Please try again.")
